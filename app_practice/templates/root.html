@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1><제곱근계산기></h1>
+    <form action="">
+        <label for="input">숫자입력</label>
+        <input type="text" name="input" id="input" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+        <input type="submit" value="calulate">
+    </form>
+    <p>{{input}}의 제곱근은 {{rootnum}}입니다.</p>
+</body>
+</html>
