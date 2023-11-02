@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+        <div class="d-inline align-self-center">
+            # {{post.id}}
+            {{post.title}}
+        </div>
+        <div class="d-inline">
+            <a href="{% url 'board:b_index' %}" class="btn btn-secondary border">목록으로</a>
+        </div>
+    </div>
+    <div class="card-body">
+        {{ post.content }}
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+        <div class="d-inline align-self-center">
+            {{ post.created_at }}
+        </div>
+        <div class="d-inline">
+            <a href="{% url 'board:edit' id=post.id %}" class="btn btn-primary">수정</a>
+            <a href="{% url 'board:delete' id=post.id %}" class="btn btn-danger">삭제</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="d-flex justify-content-end">
+<a href="{% url 'board:new' %}" class="btn btn-light">게시물작성</a>
+</div>
+<table class="table mt-1">
+    <thead class="table-primary">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">title</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <td>{{ post.id }}</td>
+            <td><a href="{% url 'board:content' id=post.id %}">{{ post.title }}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+{% endblock %}
