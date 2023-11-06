@@ -25,21 +25,22 @@
             </div>
         </div>
     </div>
-    <hr>
-    <p class="d-inline color">댓글</p>
-    <hr>
+
+    <div class="card-header mt-4 border">댓글</div>
     
+    <div>
     {% for comment in post.comment_set.all %}
-        <div class="d-flex justify-content-between">
+        <div class="container d-flex justify-content-between">
             <span>{{ comment.content }}</span> 
             <a href="{% url 'board:comment_delete' post_id=post.id id=comment.id %}">delete</a>           
         </div>
-        <div>
+        <div class="container">
             {{ comment.updated_at }}
         </div>
         <hr>
     {% endfor %}
-        <form action="{% url 'board:comment_create' post_id=post.id %}" method="POST" class="form">
+    </div>
+    <form action="{% url 'board:comment_create' post_id=post.id %}" method="POST" class="form">
         {% csrf_token %}
         {% bootstrap_form form show_label=False %}
         <input type="submit" value="작성" class="btn btn-primary">
