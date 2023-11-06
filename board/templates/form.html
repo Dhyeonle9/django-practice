@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block body %}
+
+    <div class="d-flex justify-content-end">
+        <a href="{% url 'board:b_index' %}" class="btn btn-light">돌아가기</a>
+    </div>
+    <form action="" method="POST" class="form">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+        {% bootstrap_button "Save" button_type="submit" button_class="btn-primary" %}
+    </form>
+{% endblock %}

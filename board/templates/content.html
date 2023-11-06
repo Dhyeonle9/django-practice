@@ -1,27 +1,46 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<div class="card">
-    <div class="card-header d-flex justify-content-between">
-        <div class="d-inline align-self-center">
-            # {{post.id}}
-            {{post.title}}
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="d-inline align-self-center">
+                # {{post.id}}
+                {{post.title}}
+            </div>
+            <div class="d-inline">
+                <a href="{% url 'board:b_index' %}" class="btn btn-secondary border">목록으로</a>
+            </div>
         </div>
-        <div class="d-inline">
-            <a href="{% url 'board:b_index' %}" class="btn btn-secondary border">목록으로</a>
+        <div class="card-body">
+            {{ post.content }}
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <div class="d-inline align-self-center">
+                {{ post.created_at }}
+            </div>
+            <div class="d-inline">
+                <a href="{% url 'board:update' id=post.id %}" class="btn btn-primary">수정</a>
+                <a href="{% url 'board:delete' id=post.id %}" class="btn btn-danger">삭제</a>
+            </div>
         </div>
     </div>
-    <div class="card-body">
-        {{ post.content }}
-    </div>
-    <div class="card-footer d-flex justify-content-between">
-        <div class="d-inline align-self-center">
-            {{ post.created_at }}
+    <hr>
+    <p class="d-inline">댓글</p>
+    <hr>
+    
+    {% for comment in post.comment_set.all %}
+        <div class="d-flex justify-content-between">
+            <span>{{ comment.content }}</span> 
+            <a href="{% url 'board:comment_delete' post_id=post.id id=comment.id %}">delete</a>           
         </div>
-        <div class="d-inline">
-            <a href="{% url 'board:edit' id=post.id %}" class="btn btn-primary">수정</a>
-            <a href="{% url 'board:delete' id=post.id %}" class="btn btn-danger">삭제</a>
+        <div class="d-flex justify-content-end">
+            {{ comment.updated_at.datetime }}
         </div>
-    </div>
-</div>
+        <hr>
+    {% endfor %}
+        <form action="{% url 'board:comment_create' post_id=post.id %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="작성" class="btn btn-primary">
+    </form>
 {% endblock %}
