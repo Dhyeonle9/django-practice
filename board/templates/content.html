@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
 
 {% block body %}
     <div class="card">
@@ -38,9 +39,9 @@
         </div>
         <hr>
     {% endfor %}
-        <form action="{% url 'board:comment_create' post_id=post.id %}" method="POST">
+        <form action="{% url 'board:comment_create' post_id=post.id %}" method="POST" class="form">
         {% csrf_token %}
-        {{ form }}
+        {% bootstrap_form form show_label=False %}
         <input type="submit" value="작성" class="btn btn-primary">
     </form>
 {% endblock %}
