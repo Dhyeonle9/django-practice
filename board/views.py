@@ -14,7 +14,7 @@ def index(request):
 
 def content(request, id):
     post = Post.objects.get(id=id)
-    form = CommentForm
+    form = CommentForm()
 
     # comments = post.comment_set.all()
     context = {
