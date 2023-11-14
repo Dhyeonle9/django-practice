@@ -21,8 +21,10 @@ from app_practice import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    # 게시판
     path('board/', include('board.urls')),
     # django 친해지기
     path('app_practice/', include('app_practice.urls')),
-
+    # accounts
+    path('accounts/', include('accounts.urls')),
 ]
